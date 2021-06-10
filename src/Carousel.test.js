@@ -44,9 +44,9 @@ it("works when you click on the left arrow", function() {
 })
 
 it("hides left arrow on first image", function() {
-
+  
 })
 
 it("hides right arrow on last image", function() {
-  
+
 })
