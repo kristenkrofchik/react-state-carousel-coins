@@ -30,17 +30,23 @@ it("works when you click on the right arrow", function() {
 });
 
 it("works when you click on the left arrow", function() {
-  const { queryByTestId, queryByAltText } = render(<Carousel />);
+  const { getByTestId, queryByAltText } = render(<Carousel />);
+  const leftArrow = getByTestId("left-arrow");
+  const rightArrow = getByTestId("right-arrow");
 
-    // expect the first image to show, but not the second
-    expect(queryByAltText("Photo by Richard Pasquarella on Unsplash")).toBeInTheDocument();
-    expect(queryByAltText("Photo by Pratik Patel on Unsplash")).not.toBeInTheDocument();
+  // move to the right
+  fireEvent.click(rightArrow);
 
-    //move backward in the carousel
-    const leftArrow = queryByTestId("left-arrow");
-    fireEvent.click(leftArrow);
+  // move back to the left, expect the first image to show
+  fireEvent.click(leftArrow);
+  expect(queryByAltText("Photo by Richard Pasquarella on Unsplash")).toBeInTheDocument();
+  expect(queryByAltText("Photo by Pratik Patel on Unsplash")).not.toBeInTheDocument();
+})
 
-    // expect the last image to show, but not the first
-    expect(queryByAltText("Photo by Richard Pasquarella on Unsplash")).not.toBeInTheDocument();
-    expect(queryByAltText("Photo by Josh Post on Unsplash")).toBeInTheDocument();
+it("hides left arrow on first image", function() {
+
+})
+
+it("hides right arrow on last image", function() {
+  
 })
