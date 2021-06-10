@@ -44,9 +44,27 @@ it("works when you click on the left arrow", function() {
 })
 
 it("hides left arrow on first image", function() {
-  
+  const { getByTestId } = render(<Carousel />);
+  const leftArrow = getByTestId("left-arrow");
+
+  // expect the left arrow to be missing, but the right button to be present.
+  expect(leftArrow).toHaveClass("hidden");
+  expect(rightArrow).not.toHaveClass("hidden");
 })
 
 it("hides right arrow on last image", function() {
+  const { getByTestId } = render(<Carousel />);
+  const rightArrow = getByTestId("right-arrow");
 
+  // expect the left arrow to be missing, but the right button to be present.
+  expect(leftArrow).toHaveClass("hidden");
+  expect(rightArrow).not.toHaveClass("hidden");
+
+  //move forward
+  fireEvent.click(rightArrow);
+  fireEvent.click(rightArrow);
+
+  //expect the left arrow to be present, but the right arrow to be missing
+  expect(leftArrow).not.toHaveClass("hidden");
+  expect(rightArrow).toHaveClass("hidden");
 })
